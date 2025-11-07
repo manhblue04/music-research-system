@@ -1,0 +1,9 @@
+pandas
+flask
+scikit-learn
+scipy
+numpy
+spotipy
+aiosqlite
+rapidfuzz
+annoy
