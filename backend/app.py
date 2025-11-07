@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from annoy import AnnoyIndex
 from rapidfuzz import process, fuzz
+from sklearn.metrics.pairwise import cosine_similarity
 
 # ==== Cấu hình ====
 DATA_PATH = "data/data.csv"
@@ -70,6 +71,7 @@ def search():
     })
 
 # ==== Gợi ý bài hát tương tự ====
+
 @app.route("/recommend")
 def recommend():
     track_id = request.args.get("id")
@@ -88,19 +90,21 @@ def recommend():
         return jsonify({"error": "Thiếu id hoặc name"}), 400
 
     # Lấy top N bài gần nhất từ ANN
-    top_idx = ann_index.get_nns_by_item(idx, TOP_N_RECOMMEND + 1)  # +1 để loại bài gốc
+    top_idx = ann_index.get_nns_by_item(idx, TOP_N_RECOMMEND + 1)
     top_idx = [i for i in top_idx if i != idx][:TOP_N_RECOMMEND]
 
     result = df.iloc[top_idx][['id', 'name', 'artists','release_date', 'popularity']].copy()
-    # Tính similarity chính xác giữa vector bài gốc và top kết quả
+
+    # Tính cosine similarity chính xác giữa vector bài gốc và top kết quả
     song_vec = X[idx].reshape(1, -1)
-    sims = np.dot(X[top_idx], song_vec.T).flatten()
+    sims = cosine_similarity(X[top_idx], song_vec).flatten()
     result['similarity'] = sims
 
     return jsonify({
         "source": df.iloc[idx]['name'],
-        "recommendations": result.to_dict(orient='records')
+        "recommendations": result.sort_values(by='similarity', ascending=False).to_dict(orient='records')
     })
+
 
 # ==== Run ====
 if __name__ == "__main__":
