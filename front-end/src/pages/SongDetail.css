@@ -1,0 +1,22 @@
+.song-detail-section {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+.song-detail-section h1 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.detail-info {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.detail-info div {
+  font-size: 1.1rem;
+}

@@ -1,0 +1,12 @@
+.navbar-custom {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-custom .navbar-brand {
+  color: #fff !important;
+  font-size: 1.5rem;
+}
+
+.navbar-custom .navbar-brand:hover {
+  color: #ffc107 !important;
+}

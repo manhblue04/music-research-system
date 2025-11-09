@@ -5,6 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from annoy import AnnoyIndex
 from rapidfuzz import process, fuzz
 from sklearn.metrics.pairwise import cosine_similarity
+from flask_cors import CORS
 
 # ==== Cấu hình ====
 DATA_PATH = "data/data.csv"
@@ -14,6 +15,7 @@ TOP_N_RECOMMEND = 10
 
 # ==== Khởi tạo Flask ====
 app = Flask(__name__)
+CORS(app)  
 
 # ==== Đọc dữ liệu ====
 print("Đang tải dữ liệu...")
