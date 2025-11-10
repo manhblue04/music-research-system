@@ -7,3 +7,4 @@ spotipy
 aiosqlite
 rapidfuzz
 annoy
+flask_cors

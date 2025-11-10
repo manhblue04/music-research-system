@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from flask_cors import CORS
 
 # ==== Cấu hình ====
-DATA_PATH = "data/data.csv"
+DATA_PATH = "data/data_with_image.csv"
 FEATURE_COLS = ['danceability', 'energy', 'valence', 'tempo', 'loudness']
 TOP_N_SEARCH = 50
 TOP_N_RECOMMEND = 10
@@ -45,7 +45,7 @@ def top_tracks():
     top_n = request.args.get("n", 20, type=int)  # mặc định 20 bài
     result = df.sort_values(by='popularity', ascending=False).head(top_n)
     return jsonify({
-        "results": result[['id', 'name', 'artists','release_date', 'popularity']].to_dict(orient='records')
+        "results": result[['id', 'name', 'artists','release_date', 'popularity','image']].to_dict(orient='records')
     })
 
 # ==== Tìm kiếm theo tên (fuzzy search) ====
@@ -69,7 +69,7 @@ def search():
     result = result.sort_values(by='popularity', ascending=False).head(20)
 
     return jsonify({
-        "results": result[['id', 'name', 'artists','release_date', 'popularity']].to_dict(orient='records')
+        "results": result[['id', 'name', 'artists','release_date', 'popularity','image']].to_dict(orient='records')
     })
 
 # ==== Gợi ý bài hát tương tự ====
@@ -95,7 +95,7 @@ def recommend():
     top_idx = ann_index.get_nns_by_item(idx, TOP_N_RECOMMEND + 1)
     top_idx = [i for i in top_idx if i != idx][:TOP_N_RECOMMEND]
 
-    result = df.iloc[top_idx][['id', 'name', 'artists','release_date', 'popularity']].copy()
+    result = df.iloc[top_idx][['id', 'name', 'artists','release_date', 'popularity','image']].copy()
 
     # Tính cosine similarity chính xác giữa vector bài gốc và top kết quả
     song_vec = X[idx].reshape(1, -1)
