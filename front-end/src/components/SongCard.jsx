@@ -35,6 +35,11 @@ function SongCard({ song }) {
             <span className="label">Popularity:</span>
             <span>{song.popularity}%</span>
           </div>
+          {song.similarity && <div className="info-row">
+            <span className="label">Similarity:</span>
+            <span>{parseFloat(song.similarity).toFixed(3)}</span>
+          </div>}
+          
         </div>
       </Card.Body>
     </Card>

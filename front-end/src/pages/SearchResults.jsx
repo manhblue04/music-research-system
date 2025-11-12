@@ -102,11 +102,11 @@ function SearchResults() {
         </div>
       )}
 
-      {recommendations.length > 0 && (
-        <div className="mb-5">
-          <h3 className="mb-4">Similar to Best Match</h3>
+      {allResults.length > 0 && (
+        <div>
+          <h3 className="mb-4">All Search Results ({allResults.length})</h3>
           <Row className="g-4">
-            {recommendations.map((song) => (
+            {allResults.map((song) => (
               <Col key={song.id} xs={12} sm={6} md={4} lg={3}>
                 <SongCard song={song} />
               </Col>
@@ -115,11 +115,11 @@ function SearchResults() {
         </div>
       )}
 
-      {allResults.length > 0 && (
-        <div>
-          <h3 className="mb-4">All Search Results ({allResults.length})</h3>
+      {recommendations.length > 0 && (
+        <div className="mb-5">
+          <h3 className="mb-4">Similar to Best Match</h3>
           <Row className="g-4">
-            {allResults.map((song) => (
+            {recommendations.map((song) => (
               <Col key={song.id} xs={12} sm={6} md={4} lg={3}>
                 <SongCard song={song} />
               </Col>
