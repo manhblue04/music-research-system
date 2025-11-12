@@ -20,7 +20,7 @@ function SongCard({ song }) {
     >
       <Card.Img
         variant="top"
-        src={song.image_url || "/placeholder.svg?height=200&width=200&query=music+album+cover"}
+        src={song.image || "/placeholder.svg?height=200&width=200&query=music+album+cover"}
         alt={song.name}
       />
       <Card.Body className="d-flex flex-column">

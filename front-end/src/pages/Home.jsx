@@ -58,6 +58,7 @@ function Home() {
 
   return (
     <Container className="py-5">
+      {/* Input search */}
       <div className="search-section mb-5">
         <h1 className="mb-4">Popular Songs</h1>
         <Form onSubmit={handleSearch}>
@@ -73,7 +74,8 @@ function Home() {
           </Form.Group>
         </Form>
       </div>
-
+      {/* End Input search */}
+      
       {error && <Alert variant="danger">{error}</Alert>}
 
       {loading ? (

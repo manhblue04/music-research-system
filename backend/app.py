@@ -73,7 +73,6 @@ def search():
     })
 
 # ==== Gợi ý bài hát tương tự ====
-
 @app.route("/recommend")
 def recommend():
     track_id = request.args.get("id")
